@@ -5,27 +5,27 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    public float angle = 0f; // ¸ñÇ¥ °¢µµ, 0 ~ 90µµ
-    public float speed = 200f; // ¹®ÀÌ ¿­¸®´Â ¼Óµµ
+    public float angle = 0f; // ëª©í‘œ ê°ë„, 0 ~ 90ë„
+    public float speed = 200f; // ë¬¸ì´ ì—´ë¦¬ëŠ” ì†ë„
 
     // Update is called once per frame
     void Update()
     {
-        // °¢µµ¸¦ 0 ~ 90µµ »çÀÌ·Î Á¦ÇÑ
+        // ê°ë„ë¥¼ 0 ~ 90ë„ ì‚¬ì´ë¡œ ì œí•œ
         if (angle < 0f) angle = 0f;
         if (angle > 90f) angle = 90f;
 
-        // transform.eulerAngles[1]´Â Transform ÄÄÆ÷³ÍÆ®ÀÇ RotationÀÇ ÇöÀç Y°ªÀ» ÀÇ¹Ì, Áï ÇöÀç °¢µµ
+        // transform.eulerAngles[1]ëŠ” Transform ì»´í¬ë„ŒíŠ¸ì˜ Rotationì˜ í˜„ì¬ Yê°’ì„ ì˜ë¯¸, ì¦‰ í˜„ì¬ ê°ë„
         float currentAngle = transform.eulerAngles[1];
 
-        // ÇöÀç °¢µµ°¡ ¸ñÇ¥ÇÏ´Â °¢µµº¸´Ù ÀÛÀ» ¶§ (- 1Àº Çã¿ëÇÏ´Â ¿ÀÂ÷ ¹üÀ§)
-        if (currentAngle < angle - 1) transform.Rotate(Vector3.up, speed * Time.deltaTime); // ¿­±â
+        // í˜„ì¬ ê°ë„ê°€ ëª©í‘œí•˜ëŠ” ê°ë„ë³´ë‹¤ ì‘ì„ ë•Œ (- 1ì€ í—ˆìš©í•˜ëŠ” ì˜¤ì°¨ ë²”ìœ„)
+        if (currentAngle < angle - 1) transform.Rotate(Vector3.up, speed * Time.deltaTime); // ì—´ê¸°
 
-        // ÇöÀç °¢µµ°¡ ¸ñÇ¥ÇÏ´Â °¢µµº¸´Ù Å¬ ¶§ (+ 1Àº Çã¿ëÇÏ´Â ¿ÀÂ÷ ¹üÀ§)
-        else if (currentAngle > angle + 1) transform.Rotate(Vector3.down, speed * Time.deltaTime); // ´İ±â
+        // í˜„ì¬ ê°ë„ê°€ ëª©í‘œí•˜ëŠ” ê°ë„ë³´ë‹¤ í´ ë•Œ (+ 1ì€ í—ˆìš©í•˜ëŠ” ì˜¤ì°¨ ë²”ìœ„)
+        else if (currentAngle > angle + 1) transform.Rotate(Vector3.down, speed * Time.deltaTime); // ë‹«ê¸°
 
-        // ÇöÀç °¢µµ°¡ 0 ~ 90µµ°¡ ¾Æ´Ò ¶§, 0µµ ¾Æ·¡µµ À½¼ö°¡ ¾Æ´Ï¶ó 360µµ¶ó¼­ Á¶°Ç ÇÏ³ª¸é µÊ.
-        // º¸Åë speed°¡ ³Ê¹« ³ôÀ¸¸é ÇÑ ÇÁ·¹ÀÓ ´ç º¯ÇÏ´Â °¢µµ°¡ Ä¿¼­ ¹ß»ı
-        if (currentAngle > 90f) transform.rotation = Quaternion.Euler(0f, angle, 0f); // ¸ñÇ¥ °¢µµ·Î ¹Ù·Î ÁöÁ¤
+        // í˜„ì¬ ê°ë„ê°€ 0 ~ 90ë„ê°€ ì•„ë‹ ë•Œ, 0ë„ ì•„ë˜ë„ ìŒìˆ˜ê°€ ì•„ë‹ˆë¼ 360ë„ë¼ì„œ ì¡°ê±´ í•˜ë‚˜ë©´ ë¨.
+        // ë³´í†µ speedê°€ ë„ˆë¬´ ë†’ìœ¼ë©´ í•œ í”„ë ˆì„ ë‹¹ ë³€í•˜ëŠ” ê°ë„ê°€ ì»¤ì„œ ë°œìƒ
+        if (currentAngle > 90f) transform.rotation = Quaternion.Euler(0f, angle, 0f); // ëª©í‘œ ê°ë„ë¡œ ë°”ë¡œ ì§€ì •
     }
 }
