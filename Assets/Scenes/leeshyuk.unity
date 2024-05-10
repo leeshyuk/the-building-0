@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.177579, g: 0.22232251, b: 0.30451912, a: 1}
+  m_IndirectSpecularColor: {r: 0.17757855, g: 0.22232185, b: 0.3045176, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -181,15 +181,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4912010655547099735, guid: 1af365089fa9b974eab5d0f6c2f8d852, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4912010655547099735, guid: 1af365089fa9b974eab5d0f6c2f8d852, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000014901161
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4912010655547099735, guid: 1af365089fa9b974eab5d0f6c2f8d852, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4912010655547099735, guid: 1af365089fa9b974eab5d0f6c2f8d852, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -201,6 +201,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4912010655547099735, guid: 1af365089fa9b974eab5d0f6c2f8d852, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6398871885081721480, guid: 1af365089fa9b974eab5d0f6c2f8d852, type: 3}
+      propertyPath: angle
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -435,15 +439,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4912010655547099735, guid: 0a7eb9fa70df9584b8419b5074dbf518, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4912010655547099735, guid: 0a7eb9fa70df9584b8419b5074dbf518, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000014901161
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4912010655547099735, guid: 0a7eb9fa70df9584b8419b5074dbf518, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4912010655547099735, guid: 0a7eb9fa70df9584b8419b5074dbf518, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
