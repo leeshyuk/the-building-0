@@ -11,13 +11,17 @@
  *      1.  글자가 너무 길면 오브젝트를 벗어남
  *      
  */
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Linq;
 
 public class SignboardController : MonoBehaviour
 {   
+
+    // 간판이 양면이므로 같은 TextMeshPro 오브젝트가 2개씩 있음
+    public TextMeshPro[] number = new TextMeshPro[2];
+    public TextMeshPro[] english = new TextMeshPro[2];
+    public TextMeshPro[] korean = new TextMeshPro[2];
+
     //초기 글자들
     public string initialNumber = "401";
     public string initialEnglish = "Lecture Room";
@@ -36,64 +40,38 @@ public class SignboardController : MonoBehaviour
 
     // 위의 변수들은 기본값일 뿐 유니티 에디터에서 수정 가능
 
-    // 간판이 양면이므로 같은 TextMeshPro 오브젝트가 2개씩 있음
-    // 같은 것끼리 리스트로 모으기 위해 선언
-    private List<TextMeshPro> numberTMPs, englishTMPs, koreanTMPs;
-
-    private void Awake()
-    {
-        // 초기화
-        englishTMPs = new List<TextMeshPro>();
-        koreanTMPs = new List<TextMeshPro>();
-
-        // Inner Board -> Cube1 -> Number TMP들을 리스트로 변형해서 저장
-        Transform innerBoard = transform.GetChild(0);
-        Transform innerBoardCube1 = innerBoard.GetChild(0);
-        numberTMPs = innerBoardCube1.GetComponentsInChildren<TextMeshPro>().ToList<TextMeshPro>();
-        
-        // Outer Board -> Cube1 -> English TMP들과 Korean TMP들을 분류해서 저장
-        Transform outerBoard = transform.GetChild(1);
-        Transform outerBoardCube1 = outerBoard.GetChild(0);
-        TextMeshPro[] outerBoardTMPs = outerBoardCube1.GetComponentsInChildren<TextMeshPro>();
-        foreach (TextMeshPro textMeshPro in outerBoardTMPs)
-        {
-            if (textMeshPro.gameObject.name.StartsWith('E')) englishTMPs.Add(textMeshPro);
-            else koreanTMPs.Add(textMeshPro);
-        }
-    }
-
     private void Update()
     {
         // 이상 상태일 때
         if (strangeState)
         {
             // 글자 바꾸기
-            ChangeText(numberTMPs, strangeNumber);
-            ChangeText(englishTMPs, strangeEnglish);
-            ChangeText(koreanTMPs, strangeKorean);
+            ChangeText(number, strangeNumber);
+            ChangeText(english, strangeEnglish);
+            ChangeText(korean, strangeKorean);
 
             // 글자색 바꾸기
-            ChangeColor(numberTMPs, strangeTextColor);
-            ChangeColor(englishTMPs, strangeTextColor);
-            ChangeColor(koreanTMPs, strangeTextColor);
+            ChangeColor(number, strangeTextColor);
+            ChangeColor(english, strangeTextColor);
+            ChangeColor(korean, strangeTextColor);
         }
         else // 이상 상태 아닐 때
         {
             // 글자 원래대로
-            ChangeText(numberTMPs, initialNumber);
-            ChangeText(englishTMPs, initialEnglish);
-            ChangeText(koreanTMPs, initialKorean);
+            ChangeText(number, initialNumber);
+            ChangeText(english, initialEnglish);
+            ChangeText(korean, initialKorean);
             // 글자색 원래대로
-            ChangeColor(numberTMPs, new Color(0f, 45 / 255f, 87 / 255f)); // 강의실 번호는 원래색이 하얀색이 아님
-            ChangeColor(englishTMPs, Color.white);
-            ChangeColor(koreanTMPs, Color.white);
+            ChangeColor(number, new Color(0f, 45 / 255f, 87 / 255f)); // 강의실 번호는 원래색이 하얀색이 아님
+            ChangeColor(english, Color.white);
+            ChangeColor(korean, Color.white);
         }
     }
 
     // 글자를 바꾸는 메소드
     // textMeshPros: 글자를 바꿀 오브젝트들, text: 목표 글자
     // textMeshPros의 원소의 text를 text로 바꿈
-    private void ChangeText(List<TextMeshPro> textMeshPros, string text)
+    private void ChangeText(TextMeshPro[] textMeshPros, string text)
     {
         foreach (var textMeshPro in textMeshPros)
         {
@@ -105,7 +83,7 @@ public class SignboardController : MonoBehaviour
     // textMeshPros: 글자를 바꿀 오브젝트들, textColor: 목표 글자색
     // textMeshPros의 원소의 color와 colorGradient를 textColor로 바꿈
     // colorGradient를 바꾸지 않으면 글자색이 목표하는 색보다 연하게 나타나는 현상이 있음.
-    private void ChangeColor(List<TextMeshPro> textMeshPros, Color textColor)
+    private void ChangeColor(TextMeshPro[] textMeshPros, Color textColor)
     {
         foreach (var textMeshPro in textMeshPros)
         {

@@ -18,7 +18,7 @@
  */
 using UnityEngine;
 
-public class PanelController : MonoBehaviour
+public class Panel2Controller : MonoBehaviour
 {
     public float angle = 0f; // 목표 각도, 0 ~ 90도
     public float speed = 200f; // 문이 열리는 속도

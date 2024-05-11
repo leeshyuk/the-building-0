@@ -1131,7 +1131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2827825300534269929}
-  - component: {fileID: -510218816294068492}
+  - component: {fileID: 3288079392321459273}
   m_Layer: 0
   m_Name: Signboard 2
   m_TagString: Untagged
@@ -1158,7 +1158,7 @@ Transform:
   - {fileID: 4279978148079654580}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &-510218816294068492
+--- !u!114 &3288079392321459273
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1170,6 +1170,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e77fc838293f947ac60f26b587a50a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberTMPs:
+  - {fileID: 580892384521444490}
+  - {fileID: 2211601689852652337}
+  englishTMPs:
+  - {fileID: 1098059711192839407}
+  - {fileID: 6336704527504857356}
+  koreanTMPs:
+  - {fileID: 7752283191882262036}
+  - {fileID: 4064868513315691918}
   initialNumber: 401
   initialEnglish: Lecture Room
   initialKorean: "\uAC15\uC758\uC2E4"
