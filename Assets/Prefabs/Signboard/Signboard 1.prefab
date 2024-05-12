@@ -253,13 +253,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e77fc838293f947ac60f26b587a50a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberTMPs:
+  number:
   - {fileID: 580892384521444490}
   - {fileID: 2211601689852652337}
-  englishTMPs:
+  english:
   - {fileID: 1098059711192839407}
   - {fileID: 6336704527504857356}
-  koreanTMPs:
+  korean:
   - {fileID: 7752283191882262036}
   - {fileID: 4064868513315691918}
   initialNumber: 401
