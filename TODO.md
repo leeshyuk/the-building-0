@@ -40,6 +40,10 @@
 ## 게임 제작
 이번주에 아래 오브젝트에서 각자 2개씩 정해서 만들기
 
+Assets 폴더에 각자 자기 폴더 만들어서 그 안에 작업물 저장하기 (Assets/Leeshyuk 파일 참고)   
+한국외대 폰트는 Assets/TextMeshPro/Resources/Fonts & Materials에 있음   
+HUFS M SDF.asset임
+
 ### 맵
 #### 오브젝트 리스트 (일단 영상에서 보이는 것들 거의 다 적음, 영상은 1분 14초짜리 영상)
 ##### 복도
