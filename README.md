@@ -13,6 +13,9 @@
 1층에 갔는데 나가는 문이 잠겨있음   
 비밀번호를 입력해서 탈출   
 
+![project flowchart](https://github.com/leeshyuk/the-building-0/assets/163138775/efa78397-091c-48cb-8173-4bbaa724b170)
+
+
 ### 이상 현상
 1. 강의실 문 갑자기 열리는 현상
 2. 조명이 꺼지는 현상
