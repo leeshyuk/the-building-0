@@ -6,36 +6,32 @@ public class ElevatorController : MonoBehaviour
 
     public bool isOpen = false;
 
-    private Vector3[] initialCoodinate = new Vector3[2];
-    private Vector3[] openCoodinate = { new(-0.55f, 0, 0), new(0.55f, 0, 0) };
+    private Vector3[] initialCoordinate = new Vector3[2];
+    private Vector3[] openCoordinate = { new(-0.55f, 0, 0), new(0.55f, 0, 0) };
 
     private Vector3 rightVelocity = Vector3.zero;
     private Vector3 leftVelocity = Vector3.zero;
 
     private void Awake()
     {
-        initialCoodinate[0] = rightDoor.transform.localPosition;
-        initialCoodinate[1] = leftDoor.transform.localPosition;
-        print(initialCoodinate[0]);
-        print(initialCoodinate[1]);
+        initialCoordinate[0] = rightDoor.transform.localPosition;
+        initialCoordinate[1] = leftDoor.transform.localPosition;
 
-        openCoodinate[0] += initialCoodinate[0];
-        openCoodinate[1] += initialCoodinate[1];
-        print(openCoodinate[0]);
-        print(openCoodinate[1]);
+        openCoordinate[0] += initialCoordinate[0];
+        openCoordinate[1] += initialCoordinate[1];
     }
 
     private void Update()
     {
         if (isOpen)
         {
-            rightDoor.transform.localPosition = Vector3.SmoothDamp(rightDoor.transform.localPosition, openCoodinate[0], ref rightVelocity, 0.5f);
-            leftDoor.transform.localPosition = Vector3.SmoothDamp(leftDoor.transform.localPosition, openCoodinate[1], ref leftVelocity, 0.5f);
+            rightDoor.transform.localPosition = Vector3.SmoothDamp(rightDoor.transform.localPosition, openCoordinate[0], ref rightVelocity, 0.5f);
+            leftDoor.transform.localPosition = Vector3.SmoothDamp(leftDoor.transform.localPosition, openCoordinate[1], ref leftVelocity, 0.5f);
         }
         else
         {
-            rightDoor.transform.localPosition = Vector3.SmoothDamp(rightDoor.transform.localPosition, initialCoodinate[0], ref rightVelocity, 0.5f);
-            leftDoor.transform.localPosition = Vector3.SmoothDamp(leftDoor.transform.localPosition, initialCoodinate[1], ref leftVelocity, 0.5f);
+            rightDoor.transform.localPosition = Vector3.SmoothDamp(rightDoor.transform.localPosition, initialCoordinate[0], ref rightVelocity, 0.5f);
+            leftDoor.transform.localPosition = Vector3.SmoothDamp(leftDoor.transform.localPosition, initialCoordinate[1], ref leftVelocity, 0.5f);
         }
     }
 }

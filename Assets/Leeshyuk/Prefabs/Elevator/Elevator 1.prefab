@@ -83184,12 +83184,8 @@ MonoBehaviour:
   m_VersionIndex: 3322
   m_IsSelectable: 1
   m_SelectedFaces: 
-  m_SelectedEdges:
-  - a: 8944
-    b: 8946
-  - a: 8939
-    b: 8937
-  m_SelectedVertices: f0220000f2220000eb220000e9220000
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!1 &4170477062051900913
 GameObject:
   m_ObjectHideFlags: 0
@@ -84676,7 +84672,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -85050,7 +85046,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
