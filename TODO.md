@@ -34,12 +34,38 @@ HUFS M SDF.asset임
 * 강의실 시간표
 * 에어컨
 * 조명
-* 바닥 타일
+* 바닥 타일 -이승혁
 
 ### 에셋으로 구할 오브젝트
+* 플레이어
 * 쓰레기
 * 주인공이 두고 온 물건
 * 자물쇠
+
+#### 플레이어
+아래 세가지 적절히 섞으면 좋을 듯
+
+https://forum.unity.com/threads/a-basic-first-person-character-controller-for-prototyping.1169491/
+* 걷기, 달리기, 점프, 웅크리기, 슬라이딩
+* 소리 X
+* 화면이 제일 부드럽게 움직임
+* 절벽 끝에서 잘 안 움직이는 버그 (설정값이 이상한 것일 수도)   
+
+https://assetstore.unity.com/packages/tools/input-management/mini-first-person-controller-174710
+* 걷기, 달리기, 점프, 웅크리기, 줌
+* 소리 O
+* 화면이 좀 덜 부드럽게 움직임   
+* 벽에서 과하게 느려지는 버그
+* 벽에 매달릴 수 있는 버그   
+
+https://assetstore.unity.com/packages/3d/characters/modular-first-person-controller-189884
+* 걷기, 달리기, 점프, 웅크리기, 줌
+* 움직일 때 화면 흔들리는 효과, 달리기 쿨타임 있음
+* 소리 X
+* 화면이 좀 덜 부드럽게 움직임
+* 벽에서 과하게 느려지는 버그
+* 벽에 매달릴 수 있는 버그
+* 웅크리기랑 달리기 같이 누르면 속도가 빨라지는 버그
 
 ## 사운드 추가
 필요할 것 같은 사운드를 적어보기   
@@ -51,6 +77,5 @@ HUFS M SDF.asset임
 
 ## 흐름도 제작
 draw.io 사이트
-
 
 ## 자신이 구현할 이상현상 2개씩 정하기
