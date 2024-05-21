@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 2596362377368281966}
   - component: {fileID: 1720256790579332188}
   - component: {fileID: 2994017076883490343}
-  - component: {fileID: 8399095963367825966}
+  - component: {fileID: 5280391028446189845}
   - component: {fileID: 910792969506115564}
   m_Layer: 0
   m_Name: Cylinder 2
@@ -260,8 +260,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8399095963367825966
-CapsuleCollider:
+--- !u!64 &5280391028446189845
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -278,11 +278,10 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!114 &910792969506115564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4188,7 +4187,6 @@ GameObject:
   - component: {fileID: 3504729330712123818}
   - component: {fileID: 1629268275715112734}
   - component: {fileID: 8872219507018301989}
-  - component: {fileID: 99286867152307420}
   m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
@@ -4261,27 +4259,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &99286867152307420
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4730528857248887611}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5571585110336795011
 GameObject:
   m_ObjectHideFlags: 0
@@ -4317,7 +4294,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7884079039967810603}
-  - {fileID: 956318716721703867}
   m_Father: {fileID: 3327066755988050999}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3619476261043367766
@@ -8533,7 +8509,7 @@ GameObject:
   - component: {fileID: 8187135007063507948}
   - component: {fileID: 3325172966876102496}
   - component: {fileID: 2784835518440500989}
-  - component: {fileID: 4553322212794602580}
+  - component: {fileID: 5651828510430726783}
   - component: {fileID: 239561718991293528}
   m_Layer: 0
   m_Name: Red Glass
@@ -8608,8 +8584,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4553322212794602580
-CapsuleCollider:
+--- !u!64 &5651828510430726783
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -8626,11 +8602,10 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!114 &239561718991293528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17762,37 +17737,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!1 &6059992676091451609
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 956318716721703867}
-  m_Layer: 0
-  m_Name: Text 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &956318716721703867
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6059992676091451609}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.45, y: -0.6, z: -0.009999999}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9204540971491878838}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7302480740483592689
 GameObject:
   m_ObjectHideFlags: 0
@@ -17804,7 +17748,7 @@ GameObject:
   - component: {fileID: 5794279581756750782}
   - component: {fileID: 6816909486395940180}
   - component: {fileID: 7581849938050222027}
-  - component: {fileID: 2586578023844495959}
+  - component: {fileID: 6105444480400317763}
   - component: {fileID: 1092034950025518448}
   m_Layer: 0
   m_Name: Cylinder 1
@@ -17879,8 +17823,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &2586578023844495959
-CapsuleCollider:
+--- !u!64 &6105444480400317763
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -17897,11 +17841,10 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!114 &1092034950025518448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20884,7 +20827,7 @@ GameObject:
   - component: {fileID: 664160992029173345}
   - component: {fileID: 7592051042886279721}
   - component: {fileID: 4813211791928963657}
-  - component: {fileID: 351874908863424834}
+  - component: {fileID: 8975031074661866414}
   - component: {fileID: 1823685540556035788}
   m_Layer: 0
   m_Name: Red Light
@@ -20958,8 +20901,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &351874908863424834
-CapsuleCollider:
+--- !u!64 &8975031074661866414
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -20976,11 +20919,10 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!114 &1823685540556035788
 MonoBehaviour:
   m_ObjectHideFlags: 0
