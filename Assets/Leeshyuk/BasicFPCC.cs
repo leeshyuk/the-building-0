@@ -31,6 +31,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
+
 
 #if UNITY_EDITOR // only required if using the Menu Item function at the end of this script
 using UnityEditor;
@@ -50,6 +52,7 @@ public class BasicFPCC : MonoBehaviour
     [Header("Main Camera")]
     [Tooltip("Drag the FPC Camera here")]
     public Transform cameraTx;                                 // Main Camera, as child of BasicFPCC object
+    private Camera playerCamera;
 
     [Header("Optional Player Graphic")]
     [Tooltip("optional capsule to visualize player in scene view")]
@@ -63,6 +66,7 @@ public class BasicFPCC : MonoBehaviour
     public string axisLookVertical = "Mouse Y";             //
     public string axisMoveHorzizontal = "Horizontal";          // WASD to Move
     public string axisMoveVertical = "Vertical";            //
+    public KeyCode keyZoom = KeyCode.Mouse1;
     public KeyCode keyRun = KeyCode.LeftShift;     // Left Shift to Run
     public KeyCode keyJump = KeyCode.Space;         // Space to Jump
     public KeyCode keyToggleCursor = KeyCode.BackQuote;     // ` to toggle lock cursor (aka [~] console key)
@@ -80,6 +84,11 @@ public class BasicFPCC : MonoBehaviour
     [Header("Look Settings")]
     public float mouseSensitivityX = 2f;             // speed factor of look X
     public float mouseSensitivityY = 2f;             // speed factor of look Y
+    public bool enableZoom = true;
+    public bool holdToZoom = true;
+    public float fov = 60f;
+    public float zoomFOV = 30f;
+    public float zoomStepTime = 5f;
     [Tooltip("larger values for less filtering, more responsiveness")]
     public float mouseSnappiness = 20f;              // default was 10f; larger values of this cause less filtering, more responsiveness
     public bool invertLookY = false;                 // toggle invert look Y
@@ -106,6 +115,7 @@ public class BasicFPCC : MonoBehaviour
     private float accMouseX = 0;                     // reference for mouse look smoothing
     private float accMouseY = 0;                     // reference for mouse look smoothing
     private Vector3 lastPos = Vector3.zero;          // reference for player velocity
+    private bool isZoomed = false;
     [Space(5)]
     public bool isGrounded = false;
     public float groundOffsetY = 0.65f;                 // calculated offset relative to height
@@ -133,7 +143,8 @@ public class BasicFPCC : MonoBehaviour
         if (!cameraTx) { Debug.LogError("* " + gameObject.name + ": BasicFPCC has NO CAMERA ASSIGNED in the Inspector *"); }
 
         controller = GetComponent<CharacterController>();
-
+        playerCamera = cameraTx.GetComponent<Camera>();
+        playerCamera.fieldOfView = fov;
         playerTx = transform;
         lastSpeed = 0;
         fauxGravity = Vector3.up * gravity;
@@ -180,6 +191,48 @@ public class BasicFPCC : MonoBehaviour
 
         // rotate player Y
         playerTx.Rotate(Vector3.up * mouseX);
+
+        if (enableZoom)
+        {
+            // Changes isZoomed when key is pressed
+            // Behavior for toogle zoom
+            if (Input.GetKeyDown(keyZoom) && !holdToZoom)
+            {
+                if (!isZoomed)
+                {
+                    isZoomed = true;
+                }
+                else
+                {
+                    isZoomed = false;
+                }
+            }
+
+            // Changes isZoomed when key is pressed
+            // Behavior for hold to zoom
+            if (holdToZoom)
+            {
+                if (Input.GetKeyDown(keyZoom))
+                {
+                    isZoomed = true;
+                }
+                else if (Input.GetKeyUp(keyZoom))
+                {
+                    isZoomed = false;
+                }
+            }
+
+            // Lerps camera.fieldOfView to allow for a smooth transistion
+            if (isZoomed)
+            {
+                playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, zoomFOV, zoomStepTime * Time.deltaTime);
+            }
+            else
+            {
+                playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, fov, zoomStepTime * Time.deltaTime);
+            }
+        }
+
     }
 
     void ProcessMovement()
@@ -224,7 +277,7 @@ public class BasicFPCC : MonoBehaviour
 
         if (isGrounded)
         {
-                // reset angular fauxGravity movement
+            // reset angular fauxGravity movement
             fauxGravity.x = 0;
             fauxGravity.z = 0;
 
