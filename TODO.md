@@ -76,6 +76,6 @@ https://assetstore.unity.com/packages/3d/characters/modular-first-person-control
 4. 엘리베이터 안내음
 
 ## 흐름도 제작
-draw.io 사이트 or 프로그램
+draw.io 사이트
 
 ## 자신이 구현할 이상현상 2개씩 정하기
