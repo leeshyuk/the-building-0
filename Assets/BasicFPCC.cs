@@ -28,9 +28,13 @@
 // at the end of this script is a Menu Item function to create and auto-configure a BasicFPCC object
 // GameObject -> 3D Object -> BasicFPCC
 
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Unity.VisualScripting;
+using UnityEngine.TextCore.Text;
+
+
+
 
 #if UNITY_EDITOR // only required if using the Menu Item function at the end of this script
 using UnityEditor;
@@ -50,6 +54,7 @@ public class BasicFPCC : MonoBehaviour
     [Header("Main Camera")]
     [Tooltip("Drag the FPC Camera here")]
     public Transform cameraTx;                                 // Main Camera, as child of BasicFPCC object
+    private Camera playerCamera;
 
     [Header("Optional Player Graphic")]
     [Tooltip("optional capsule to visualize player in scene view")]
@@ -63,6 +68,7 @@ public class BasicFPCC : MonoBehaviour
     public string axisLookVertical = "Mouse Y";             //
     public string axisMoveHorzizontal = "Horizontal";          // WASD to Move
     public string axisMoveVertical = "Vertical";            //
+    public KeyCode keyZoom = KeyCode.Mouse1;
     public KeyCode keyRun = KeyCode.LeftShift;     // Left Shift to Run
     public KeyCode keyJump = KeyCode.Space;         // Space to Jump
     public KeyCode keyToggleCursor = KeyCode.BackQuote;     // ` to toggle lock cursor (aka [~] console key)
@@ -80,6 +86,11 @@ public class BasicFPCC : MonoBehaviour
     [Header("Look Settings")]
     public float mouseSensitivityX = 2f;             // speed factor of look X
     public float mouseSensitivityY = 2f;             // speed factor of look Y
+    public bool enableZoom = true;
+    public bool holdToZoom = true;
+    public float fov = 60f;
+    public float zoomFOV = 30f;
+    public float zoomStepTime = 5f;
     [Tooltip("larger values for less filtering, more responsiveness")]
     public float mouseSnappiness = 20f;              // default was 10f; larger values of this cause less filtering, more responsiveness
     public bool invertLookY = false;                 // toggle invert look Y
@@ -106,6 +117,7 @@ public class BasicFPCC : MonoBehaviour
     private float accMouseX = 0;                     // reference for mouse look smoothing
     private float accMouseY = 0;                     // reference for mouse look smoothing
     private Vector3 lastPos = Vector3.zero;          // reference for player velocity
+    private bool isZoomed = false;
     [Space(5)]
     public bool isGrounded = false;
     public float groundOffsetY = 0.65f;                 // calculated offset relative to height
@@ -115,9 +127,41 @@ public class BasicFPCC : MonoBehaviour
     [Space(5)]
     public bool cursorActive = false;                // cursor state
 
+    [Header("Audio")]
+    public float velocityThreshold = 0.05f;
+    Vector2 lastCharacterPosition;
+    Vector2 CurrentCharacterPosition => new(transform.position.x, transform.position.z);
+
+    public AudioSource stepAudio;
+    public AudioSource runningAudio;
+    public AudioSource landingAudio;
+    public AudioClip[] landingSFX;
+    public AudioSource jumpAudio;
+    public AudioClip[] jumpSFX;
+    AudioSource[] MovingAudios => new AudioSource[] { stepAudio, runningAudio };
+    [Header("Running Camera")]
+    public float sprintFOV = 80f;
+    public float sprintFOVStepTime = 10f;
 
     void Start()
     {
+        stepAudio = GetAudioSource("Step Audio");
+        runningAudio = GetAudioSource("Running Audio");
+        landingAudio = GetAudioSource("Landing Audio");
+        jumpAudio = GetAudioSource("Jump Audio");
+        landingSFX = new AudioClip[]
+        {
+            Resources.Load<AudioClip>("Landing 1"),
+            Resources.Load<AudioClip>("Landing 2"),
+            Resources.Load<AudioClip>("Landing 3")
+
+        };
+        jumpSFX = new AudioClip[]
+        {
+            Resources.Load<AudioClip>("Jump 1"),
+            Resources.Load<AudioClip>("Jump 2"),
+            Resources.Load<AudioClip>("Jump 3")
+        };
         Initialize();
     }
 
@@ -128,12 +172,75 @@ public class BasicFPCC : MonoBehaviour
         ProcessMovement();
     }
 
+    private void FixedUpdate()
+    {
+        float velocity = Vector3.Distance(CurrentCharacterPosition, lastCharacterPosition);
+        if (velocity >= velocityThreshold && isGrounded)
+        {
+            if (inputKeyRun)
+            {
+                SetPlayingMovingAudio(runningAudio);
+            }
+            else
+            {
+                SetPlayingMovingAudio(stepAudio);
+            }
+        }
+        else
+        {
+            SetPlayingMovingAudio(null);
+        }
+        lastCharacterPosition = CurrentCharacterPosition;
+    }
+
+    void PlayLandingAudio() => PlayRandomClip(landingAudio, landingSFX);
+    void PlayJumpAudio() => PlayRandomClip(jumpAudio, jumpSFX);
+
+    void SetPlayingMovingAudio(AudioSource audioToPlay)
+    {
+        // Pause all MovingAudios.
+        foreach (var audio in MovingAudios.Where(audio => audio != audioToPlay && audio != null))
+        {
+            audio.Pause();
+        }
+
+        // Play audioToPlay if it was not playing.
+        if (audioToPlay && !audioToPlay.isPlaying)
+        {
+            audioToPlay.Play();
+        }
+    }
+
+    AudioSource GetAudioSource(string name)
+    {
+        // Try to get the audiosource.
+        AudioSource result = System.Array.Find(GetComponentsInChildren<AudioSource>(), a => a.name == name);
+        return result;
+    }
+
+    static void PlayRandomClip(AudioSource audio, AudioClip[] clips)
+    {
+        if (!audio || clips.Length <= 0)
+            return;
+
+        // Get a random clip. If possible, make sure that it's not the same as the clip that is already on the audiosource.
+        AudioClip clip = clips[Random.Range(0, clips.Length)];
+        if (clips.Length > 1)
+            while (clip == audio.clip)
+                clip = clips[Random.Range(0, clips.Length)];
+
+        // Play the clip.
+        audio.clip = clip;
+        audio.Play();
+    }
+
     void Initialize()
     {
         if (!cameraTx) { Debug.LogError("* " + gameObject.name + ": BasicFPCC has NO CAMERA ASSIGNED in the Inspector *"); }
 
         controller = GetComponent<CharacterController>();
-
+        playerCamera = cameraTx.GetComponent<Camera>();
+        playerCamera.fieldOfView = fov;
         playerTx = transform;
         lastSpeed = 0;
         fauxGravity = Vector3.up * gravity;
@@ -180,6 +287,48 @@ public class BasicFPCC : MonoBehaviour
 
         // rotate player Y
         playerTx.Rotate(Vector3.up * mouseX);
+
+        if (enableZoom)
+        {
+            // Changes isZoomed when key is pressed
+            // Behavior for toogle zoom
+            if (Input.GetKeyDown(keyZoom) && !holdToZoom)
+            {
+                if (!isZoomed)
+                {
+                    isZoomed = true;
+                }
+                else
+                {
+                    isZoomed = false;
+                }
+            }
+
+            // Changes isZoomed when key is pressed
+            // Behavior for hold to zoom
+            if (holdToZoom)
+            {
+                if (Input.GetKeyDown(keyZoom))
+                {
+                    isZoomed = true;
+                }
+                else if (Input.GetKeyUp(keyZoom))
+                {
+                    isZoomed = false;
+                }
+            }
+
+            // Lerps camera.fieldOfView to allow for a smooth transistion
+            if (isZoomed)
+            {
+                playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, zoomFOV, zoomStepTime * Time.deltaTime);
+            }
+            else
+            {
+                playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, fov, zoomStepTime * Time.deltaTime);
+            }
+        }
+
     }
 
     void ProcessMovement()
@@ -201,10 +350,11 @@ public class BasicFPCC : MonoBehaviour
 
         // - Run -
 
-        // if grounded
-        if (isGrounded && inputKeyRun)
+        if (inputKeyRun)
         {
+            isZoomed = false;
             nextSpeed = runSpeed; // to run speed
+            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, sprintFOV, sprintFOVStepTime * Time.deltaTime);
         }
 
         lastPos = playerTx.position; // update reference
@@ -217,14 +367,14 @@ public class BasicFPCC : MonoBehaviour
             move = move.normalized;
         }
 
-        // - Slipping Jumping Gravity -
+        // - Jumping Gravity -
 
         // smooth speed
         float speed;
 
         if (isGrounded)
         {
-                // reset angular fauxGravity movement
+            // reset angular fauxGravity movement
             fauxGravity.x = 0;
             fauxGravity.z = 0;
 
@@ -237,6 +387,7 @@ public class BasicFPCC : MonoBehaviour
             if (inputKeyDownJump) // jump
             {
                 fauxGravity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                PlayJumpAudio();
             }
 
             // --
@@ -319,12 +470,13 @@ public class BasicFPCC : MonoBehaviour
         Vector3 origin = new(playerTx.position.x, playerTx.position.y + groundOffsetY, playerTx.position.z);
 
         // Out hit point from our cast(s)
-
+        bool last = isGrounded;
         // SPHERECAST
         // "Casts a sphere along a ray and returns detailed information on what was hit."
         if (Physics.SphereCast(origin, sphereCastRadius, Vector3.down, out _, sphereCastDistance, castingMask))
         {
             isGrounded = true;
+            if (last != true) PlayLandingAudio();
         }
         else
         {
@@ -411,6 +563,7 @@ public class BasicFPCC_Setup : MonoBehaviour
         controller.center = new Vector3(0, 1, 0);
 
         BasicFPCC basicFPCC = go.AddComponent<BasicFPCC>();
+        go.AddComponent<AudioListener>();
 
         // Layer Mask
         go.layer = playerLayer;
@@ -446,6 +599,37 @@ public class BasicFPCC_Setup : MonoBehaviour
         gfx.layer = playerLayer;
         basicFPCC.playerGFX = gfx.transform;
         gfx.SetActive(false);
+
+        GameObject stepAudio = new("Step Audio");
+        stepAudio.AddComponent<AudioSource>();
+        stepAudio.transform.parent = go.transform;
+        stepAudio.transform.localPosition = Vector3.zero;
+        stepAudio.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Steps");
+        stepAudio.GetComponent<AudioSource>().playOnAwake = false;
+        stepAudio.GetComponent<AudioSource>().spatialBlend = 1;
+
+        GameObject runningAudio = new("Running Audio");
+        runningAudio.AddComponent<AudioSource>();
+        runningAudio.transform.parent = go.transform;
+        runningAudio.transform.localPosition = Vector3.zero;
+        runningAudio.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Steps");
+        runningAudio.GetComponent<AudioSource>().playOnAwake = false;
+        runningAudio.GetComponent<AudioSource>().pitch = 1.3f;
+        runningAudio.GetComponent<AudioSource>().spatialBlend = 1;
+
+        GameObject landingAudio = new("Landing Audio");
+        landingAudio.AddComponent<AudioSource>();
+        landingAudio.transform.parent = go.transform;
+        landingAudio.transform.localPosition = Vector3.zero;
+        landingAudio.GetComponent<AudioSource>().playOnAwake = false;
+        landingAudio.GetComponent<AudioSource>().spatialBlend = 1;
+
+        GameObject jumpAudio = new("Jump Audio");
+        jumpAudio.AddComponent<AudioSource>();
+        jumpAudio.transform.parent = go.transform;
+        jumpAudio.transform.localPosition = Vector3.zero;
+        jumpAudio.GetComponent<AudioSource>().playOnAwake = false;
+        jumpAudio.GetComponent<AudioSource>().spatialBlend = 1;
     }
 #endif
 }
