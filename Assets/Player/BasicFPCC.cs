@@ -32,6 +32,8 @@ using System.Linq;
 using UnityEngine;
 using Unity.VisualScripting;
 using UnityEngine.TextCore.Text;
+using UnityEngine.UI;
+
 
 
 
@@ -569,25 +571,13 @@ public class BasicFPCC_Setup : MonoBehaviour
         go.layer = playerLayer;
         basicFPCC.castingMask = ~(1 << playerLayer);
 
-        // Main Camera
-        GameObject mainCamObject = GameObject.Find("Main Camera");
-        if (mainCamObject)
-        {
-            mainCamObject.transform.parent = go.transform;
-            mainCamObject.transform.SetLocalPositionAndRotation(new Vector3(0, 1.7f, 0), Quaternion.identity);
-            basicFPCC.cameraTx = mainCamObject.transform;
-        }
-        else // create example camera
-        {
-            Debug.LogWarning("** Main Camera NOT FOUND ** \nA new Camera has been created and assigned. Please replace this with the Main Camera (and associated AudioListener).");
-
-            GameObject camGo = new("BasicFPCC Camera");
-            camGo.AddComponent<Camera>();
-            camGo.GetComponent<Camera>().nearClipPlane = 0.1f;
-            camGo.transform.parent = go.transform;
-            camGo.transform.SetLocalPositionAndRotation(new Vector3(0, 1.7f, 0), Quaternion.identity);
-            basicFPCC.cameraTx = camGo.transform;
-        }
+        GameObject camGo = new("BasicFPCC Camera");
+        camGo.AddComponent<Camera>();
+        camGo.AddComponent<InteractionManager>();
+        camGo.GetComponent<Camera>().nearClipPlane = 0.1f;
+        camGo.transform.parent = go.transform;
+        camGo.transform.SetLocalPositionAndRotation(new Vector3(0, 1.7f, 0), Quaternion.identity);
+        basicFPCC.cameraTx = camGo.transform;
 
         // GFX
         GameObject gfx = GameObject.CreatePrimitive(PrimitiveType.Capsule);
@@ -601,35 +591,50 @@ public class BasicFPCC_Setup : MonoBehaviour
         gfx.SetActive(false);
 
         GameObject stepAudio = new("Step Audio");
-        stepAudio.AddComponent<AudioSource>();
         stepAudio.transform.parent = go.transform;
         stepAudio.transform.localPosition = Vector3.zero;
+        stepAudio.AddComponent<AudioSource>();
         stepAudio.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Steps");
         stepAudio.GetComponent<AudioSource>().playOnAwake = false;
         stepAudio.GetComponent<AudioSource>().spatialBlend = 1;
 
         GameObject runningAudio = new("Running Audio");
-        runningAudio.AddComponent<AudioSource>();
         runningAudio.transform.parent = go.transform;
         runningAudio.transform.localPosition = Vector3.zero;
+        runningAudio.AddComponent<AudioSource>();
         runningAudio.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Steps");
         runningAudio.GetComponent<AudioSource>().playOnAwake = false;
         runningAudio.GetComponent<AudioSource>().pitch = 1.3f;
         runningAudio.GetComponent<AudioSource>().spatialBlend = 1;
 
         GameObject landingAudio = new("Landing Audio");
-        landingAudio.AddComponent<AudioSource>();
         landingAudio.transform.parent = go.transform;
         landingAudio.transform.localPosition = Vector3.zero;
+        landingAudio.AddComponent<AudioSource>();
         landingAudio.GetComponent<AudioSource>().playOnAwake = false;
         landingAudio.GetComponent<AudioSource>().spatialBlend = 1;
 
         GameObject jumpAudio = new("Jump Audio");
-        jumpAudio.AddComponent<AudioSource>();
         jumpAudio.transform.parent = go.transform;
         jumpAudio.transform.localPosition = Vector3.zero;
+        jumpAudio.AddComponent<AudioSource>();
         jumpAudio.GetComponent<AudioSource>().playOnAwake = false;
         jumpAudio.GetComponent<AudioSource>().spatialBlend = 1;
+
+
+        GameObject crosshairCanvas = new("Crosshair Canvas");
+        crosshairCanvas.transform.SetParent(camGo.transform, false);
+        crosshairCanvas.AddComponent<Canvas>();
+        crosshairCanvas.AddComponent<CanvasScaler>();
+        crosshairCanvas.AddComponent<GraphicRaycaster>();
+        crosshairCanvas.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+        crosshairCanvas.GetComponent<Canvas>().vertexColorAlwaysGammaSpace = true;
+
+        GameObject crosshair = new("Crosshair");
+        crosshair.transform.SetParent(crosshairCanvas.transform, false);
+        crosshair.AddComponent<Image>();
+        crosshair.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+        crosshair.GetComponent<RectTransform>().sizeDelta = new Vector2(2.5f, 2.5f);
     }
 #endif
 }

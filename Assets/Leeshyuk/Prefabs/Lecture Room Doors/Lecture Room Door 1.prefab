@@ -1758,7 +1758,7 @@ GameObject:
   - component: {fileID: 6728997632957664471}
   m_Layer: 0
   m_Name: Lecture Room Door 1
-  m_TagString: Untagged
+  m_TagString: Interactable Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1803,11 +1803,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8351752943175160122}
     m_Modifications:
-    - target: {fileID: 2139437679549430655, guid: ffa5715a246f19f4590e7edccdc6eab5,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8018188240323242045, guid: ffa5715a246f19f4590e7edccdc6eab5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1857,11 +1852,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8606289170759347440, guid: ffa5715a246f19f4590e7edccdc6eab5,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8970604103850696856, guid: ffa5715a246f19f4590e7edccdc6eab5,
         type: 3}
