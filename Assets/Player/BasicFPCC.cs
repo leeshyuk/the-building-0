@@ -86,12 +86,12 @@ public class BasicFPCC : MonoBehaviour
     [HideInInspector] public bool inputKeyDownCursor = false;  // is key Pressed
 
     [Header("Look Settings")]
-    public float mouseSensitivityX = 2f;             // speed factor of look X
-    public float mouseSensitivityY = 2f;             // speed factor of look Y
+    public float mouseSensitivityX = 1f;             // speed factor of look X
+    public float mouseSensitivityY = 1f;             // speed factor of look Y
     public bool enableZoom = true;
     public bool holdToZoom = true;
     public float fov = 60f;
-    public float zoomFOV = 30f;
+    public float zoomFOV = 10f;
     public float zoomStepTime = 5f;
     [Tooltip("larger values for less filtering, more responsiveness")]
     public float mouseSnappiness = 20f;              // default was 10f; larger values of this cause less filtering, more responsiveness
@@ -99,13 +99,13 @@ public class BasicFPCC : MonoBehaviour
     public float clampLookY = 90f;                   // maximum look up/down angle
 
     [Header("Move Settings")]
-    public float walkSpeed = 3f;                     // regular movement speed
-    public float runSpeed = 6f;                     // run movement speed
+    public float walkSpeed = 2f;                     // regular movement speed
+    public float runSpeed = 4f;                     // run movement speed
     public float gravity = -9.81f;                   // gravity / fall rate
-    public float jumpHeight = 0.4f;                  // jump height
+    public float jumpHeight = 0.2f;                  // jump height
 
     [Space(5)]
-    public float sphereCastRadius = 0.25f;           // radius of area to detect for ground
+    public float sphereCastRadius = 0.125f;           // radius of area to detect for ground
     public float sphereCastDistance = 0.5f;         // How far spherecast moves down from origin point
 
     [Header("Debug Gizmos")]
@@ -122,15 +122,15 @@ public class BasicFPCC : MonoBehaviour
     private bool isZoomed = false;
     [Space(5)]
     public bool isGrounded = false;
-    public float groundOffsetY = 0.65f;                 // calculated offset relative to height
+    public float groundOffsetY = 0.525f;                 // calculated offset relative to height
     [Space(5)]
     public bool isCeiling = false;
-    public float ceilingOffsetY = 1.25f;                // calculated offset relative to height
+    public float ceilingOffsetY = 1.375f;                // calculated offset relative to height
     [Space(5)]
     public bool cursorActive = false;                // cursor state
 
     [Header("Audio")]
-    public float velocityThreshold = 0.05f;
+    public float velocityThreshold = 0.02f;
     Vector2 lastCharacterPosition;
     Vector2 CurrentCharacterPosition => new(transform.position.x, transform.position.z);
 
@@ -324,10 +324,14 @@ public class BasicFPCC : MonoBehaviour
             if (isZoomed)
             {
                 playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, zoomFOV, zoomStepTime * Time.deltaTime);
+                mouseSensitivityX = 0.25f;
+                mouseSensitivityY = 0.25f;
             }
             else
             {
                 playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, fov, zoomStepTime * Time.deltaTime);
+                mouseSensitivityX = 1f;
+                mouseSensitivityY = 1f;
             }
         }
 
@@ -559,7 +563,7 @@ public class BasicFPCC_Setup : MonoBehaviour
     public static void CreateBasicFPCC()
     {
         GameObject go = new("Player");
-        go.transform.localScale = new Vector3(0.5f, 0.7f, 0.5f);
+        go.transform.localScale = new Vector3(0.25f, 0.7f, 0.25f);
 
         CharacterController controller = go.AddComponent<CharacterController>();
         controller.center = new Vector3(0, 1, 0);
@@ -574,7 +578,7 @@ public class BasicFPCC_Setup : MonoBehaviour
         GameObject camGo = new("BasicFPCC Camera");
         camGo.AddComponent<Camera>();
         camGo.AddComponent<InteractionManager>();
-        camGo.GetComponent<Camera>().nearClipPlane = 0.1f;
+        camGo.GetComponent<Camera>().nearClipPlane = 0f;
         camGo.transform.parent = go.transform;
         camGo.transform.SetLocalPositionAndRotation(new Vector3(0, 1.7f, 0), Quaternion.identity);
         basicFPCC.cameraTx = camGo.transform;
@@ -623,7 +627,7 @@ public class BasicFPCC_Setup : MonoBehaviour
 
 
         GameObject crosshairCanvas = new("Crosshair Canvas");
-        crosshairCanvas.transform.SetParent(camGo.transform, false);
+        crosshairCanvas.transform.SetParent(go.transform, false);
         crosshairCanvas.AddComponent<Canvas>();
         crosshairCanvas.AddComponent<CanvasScaler>();
         crosshairCanvas.AddComponent<GraphicRaycaster>();
@@ -634,7 +638,7 @@ public class BasicFPCC_Setup : MonoBehaviour
         crosshair.transform.SetParent(crosshairCanvas.transform, false);
         crosshair.AddComponent<Image>();
         crosshair.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-        crosshair.GetComponent<RectTransform>().sizeDelta = new Vector2(2.5f, 2.5f);
+        crosshair.GetComponent<RectTransform>().sizeDelta = new Vector2(3f, 3f);
     }
 #endif
 }

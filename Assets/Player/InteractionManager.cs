@@ -28,7 +28,7 @@ public class InteractionManager : MonoBehaviour
 
         if (targetObject && targetObject.CompareTag("Interactable Object"))
         {
-            transform.GetComponentInChildren<UnityEngine.UI.Image>().color = Color.red;
+            transform.parent.GetComponentInChildren<UnityEngine.UI.Image>().color = Color.red;
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -39,7 +39,7 @@ public class InteractionManager : MonoBehaviour
         }
         else
         {
-            transform.GetComponentInChildren<UnityEngine.UI.Image>().color = Color.white;
+            transform.parent.GetComponentInChildren<UnityEngine.UI.Image>().color = Color.white;
 
         }
     }

@@ -6200,7 +6200,7 @@ PrefabInstance:
         type: 3}
       propertyPath: PanelPrefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8363639045931645702}
     - target: {fileID: 8351752943175160122, guid: 5426d8e3362bfbe4d97c06e35402b06a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6264,6 +6264,12 @@ PrefabInstance:
 --- !u!4 &7969808492916153848 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8351752943175160122, guid: 5426d8e3362bfbe4d97c06e35402b06a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2124873927916244162}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8363639045931645702 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7596601642673797060, guid: 5426d8e3362bfbe4d97c06e35402b06a,
     type: 3}
   m_PrefabInstance: {fileID: 2124873927916244162}
   m_PrefabAsset: {fileID: 0}
