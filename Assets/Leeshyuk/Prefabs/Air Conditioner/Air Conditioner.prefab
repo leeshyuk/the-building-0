@@ -45,8 +45,8 @@ GameObject:
   - component: {fileID: 7279227992499138768}
   - component: {fileID: 8665910802577094349}
   - component: {fileID: 5729065321816193182}
-  - component: {fileID: 757597167295360159}
   - component: {fileID: 7474825087366095258}
+  - component: {fileID: 8138493379493740677}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -119,27 +119,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &757597167295360159
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1861476495605400783}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7474825087366095258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4393,6 +4372,27 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!65 &8138493379493740677
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861476495605400783}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2.4374995, z: 1}
+  m_Center: {x: 0, y: 0.000000059604645, z: 0}
 --- !u!1 &5341382283517812216
 GameObject:
   m_ObjectHideFlags: 0
@@ -4404,7 +4404,6 @@ GameObject:
   - component: {fileID: 5968769517506528660}
   - component: {fileID: 6662651979833619399}
   - component: {fileID: 1190654350391226099}
-  - component: {fileID: 3079103058749006448}
   - component: {fileID: 3118133948914189795}
   m_Layer: 0
   m_Name: Cube (1)
@@ -4478,27 +4477,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3079103058749006448
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5341382283517812216}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3118133948914189795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5568,7 +5546,6 @@ GameObject:
   - component: {fileID: 6366458622890364255}
   - component: {fileID: 9102028415620567036}
   - component: {fileID: 1829447335868356206}
-  - component: {fileID: 4911935501101758598}
   - component: {fileID: 5417644773842939034}
   m_Layer: 0
   m_Name: Cube (4)
@@ -5642,27 +5619,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4911935501101758598
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7403319538360816419}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5417644773842939034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5888,14 +5844,6 @@ MonoBehaviour:
   m_Mesh: {fileID: 0}
   m_VersionIndex: 3967
   m_IsSelectable: 1
-  m_SelectedFaces: 00000000
-  m_SelectedEdges:
-  - a: 1
-    b: 3
-  - a: 3
-    b: 2
-  - a: 0
-    b: 1
-  - a: 2
-    b: 0
-  m_SelectedVertices: 01000000030000000200000000000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
