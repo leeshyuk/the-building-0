@@ -86,8 +86,10 @@ public class BasicFPCC : MonoBehaviour
     [HideInInspector] public bool inputKeyDownCursor = false;  // is key Pressed
 
     [Header("Look Settings")]
-    public float mouseSensitivityX = 1f;             // speed factor of look X
-    public float mouseSensitivityY = 1f;             // speed factor of look Y
+    public float sensitivityX = 1f;             // speed factor of look X
+    public float sensitivityY = 1f;             // speed factor of look y
+    private float mouseSensitivityX;
+    private float mouseSensitivityY;             
     public bool enableZoom = true;
     public bool holdToZoom = true;
     public float fov = 60f;
@@ -275,6 +277,9 @@ public class BasicFPCC : MonoBehaviour
 
     void ProcessLook()
     {
+        mouseSensitivityX = sensitivityX;
+        mouseSensitivityY = sensitivityY;
+
         accMouseX = Mathf.Lerp(accMouseX, inputLookX, mouseSnappiness * Time.deltaTime);
         accMouseY = Mathf.Lerp(accMouseY, inputLookY, mouseSnappiness * Time.deltaTime);
 
@@ -324,14 +329,14 @@ public class BasicFPCC : MonoBehaviour
             if (isZoomed)
             {
                 playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, zoomFOV, zoomStepTime * Time.deltaTime);
-                mouseSensitivityX = 0.25f;
-                mouseSensitivityY = 0.25f;
+                mouseSensitivityX = sensitivityX/4;
+                mouseSensitivityY = sensitivityY/4;
             }
             else
             {
                 playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, fov, zoomStepTime * Time.deltaTime);
-                mouseSensitivityX = 1f;
-                mouseSensitivityY = 1f;
+                mouseSensitivityX = sensitivityX;
+                mouseSensitivityY = sensitivityY;
             }
         }
 
