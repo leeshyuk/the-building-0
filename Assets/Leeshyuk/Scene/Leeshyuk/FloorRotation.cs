@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class FloorRotation : MonoBehaviour
 {
     public Transform player; // 플레이어 오브젝트
     public float distanceThreshold = 5f; // 플레이어와 중간 지점 사이의 거리 임계값

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript1 : MonoBehaviour
+public class badpic : MonoBehaviour
 {
     public GameObject player; // 플레이어 오브젝트를 참조합니다.
     public float thresholdDistance = 5.0f; // 플레이어와의 거리 임계값입니다.
