@@ -9,8 +9,6 @@
 엘리베이터가 갑자기 오작동을 일으킨 후 문이 열리는 데 1층의 구조가 5층처럼 변해있음.   
 5층 도달 시 물건 찾으면 클리어
 
-![project flowchart](https://github.com/leeshyuk/the-building-0/assets/163138775/efa78397-091c-48cb-8173-4bbaa724b170)
-
 
 ### 이상 현상
 1. 강의실 문 갑자기 열리는 현상 -이승혁
