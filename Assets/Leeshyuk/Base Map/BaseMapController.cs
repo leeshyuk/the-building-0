@@ -16,6 +16,7 @@ public class BaseMapController : MonoBehaviour
     void Start()
     {
         elevatorController = elevator.GetComponent<ElevatorController>();
+        Init(1);
     }
 
     public void Init(int floor)
@@ -87,5 +88,4 @@ public class BaseMapController : MonoBehaviour
     {
         elevatorAudioSounds[3].Stop();
     }
-
 }
