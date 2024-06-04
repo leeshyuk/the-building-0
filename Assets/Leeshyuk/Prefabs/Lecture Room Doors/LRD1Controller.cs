@@ -22,6 +22,7 @@ public class LRD1Controller : MonoBehaviour
 
     public void ExecuteInteraction()
     {
+        GetComponent<AudioSource>().Play();
         if (isOpen)
         {
             angle = 0f;

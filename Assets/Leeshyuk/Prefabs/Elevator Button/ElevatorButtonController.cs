@@ -28,6 +28,10 @@ public class ElevatorButtonController : MonoBehaviour
 
     public void ExecuteInteraction()
     {
+        if (!elevator.GetComponent<ElevatorController>().isOpen)
+        {
+            if (GetComponent<AudioSource>() != null) GetComponent<AudioSource>().Play();
+        }
         remainingTime = waitingTime;
         if (!elevator.GetComponent<ElevatorController>().isOpen)
         {

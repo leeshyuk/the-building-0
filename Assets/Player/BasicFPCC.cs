@@ -45,6 +45,7 @@ using UnityEditor;
 [RequireComponent(typeof(CharacterController))]
 public class BasicFPCC : MonoBehaviour
 {
+
     [Header("Layer Mask")]
     [Tooltip("Layer Mask for sphere/raycasts. Assign the Player object to a Layer, then Ignore that layer here.")]
     public LayerMask castingMask;                              // Layer mask for casts. You'll want to ignore the player.
@@ -120,7 +121,7 @@ public class BasicFPCC : MonoBehaviour
     private Vector3 fauxGravity = Vector3.zero;      // calculated gravity
     private float accMouseX = 0;                     // reference for mouse look smoothing
     private float accMouseY = 0;                     // reference for mouse look smoothing
-    private Vector3 lastPos = Vector3.zero;          // reference for player velocity
+    public Vector3 lastPos = Vector3.zero;          // reference for player velocity
     private bool isZoomed = false;
     [Space(5)]
     public bool isGrounded = false;
@@ -146,6 +147,12 @@ public class BasicFPCC : MonoBehaviour
     [Header("Running Camera")]
     public float sprintFOV = 80f;
     public float sprintFOVStepTime = 10f;
+
+
+    private void Awake()
+    {
+        //transform.position = new Vector3(8.7f, 0.08f, 25.7f); // 엘리
+    }
 
     void Start()
     {
@@ -295,7 +302,7 @@ public class BasicFPCC : MonoBehaviour
         // rotate player Y
         playerTx.Rotate(Vector3.up * mouseX);
 
-        if (enableZoom)
+        if (enableZoom && !inputKeyRun)
         {
             // Changes isZoomed when key is pressed
             // Behavior for toogle zoom
@@ -345,8 +352,8 @@ public class BasicFPCC : MonoBehaviour
     void ProcessMovement()
     {
         // - variables -
+        Vector3 calc;
         float nextSpeed = walkSpeed;
-        Vector3 calc; // used for calculations
         Vector3 move; // direction calculation
 
         // player current speed
@@ -363,7 +370,6 @@ public class BasicFPCC : MonoBehaviour
 
         if (inputKeyRun)
         {
-            isZoomed = false;
             nextSpeed = runSpeed; // to run speed
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, sprintFOV, sprintFOVStepTime * Time.deltaTime);
         }

@@ -1,9 +1,11 @@
+using TMPro;
 using UnityEngine;
 
 public class ElevatorController : MonoBehaviour
 {
     public GameObject rightDoor, leftDoor;
 
+    public TextMeshPro[] texts;
     public bool isOpen = false;
 
     private Vector3[] initialCoordinate = new Vector3[2];
@@ -32,6 +34,14 @@ public class ElevatorController : MonoBehaviour
         {
             rightDoor.transform.localPosition = Vector3.SmoothDamp(rightDoor.transform.localPosition, initialCoordinate[0], ref rightVelocity, 0.5f);
             leftDoor.transform.localPosition = Vector3.SmoothDamp(leftDoor.transform.localPosition, initialCoordinate[1], ref leftVelocity, 0.5f);
+        }
+    }
+
+    public void ChangeText(string n)
+    {
+        foreach (var text in texts)
+        {
+            text.text = n;
         }
     }
 }

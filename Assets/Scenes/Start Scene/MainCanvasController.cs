@@ -4,7 +4,7 @@ public class MainCanvasController : MonoBehaviour
 {
     public void OnClickStart()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Game Scene");
+        LoadingSceneController.LoadScene("Game Scene");
     }
 
     public void OnClickQuit()
