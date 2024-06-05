@@ -35,6 +35,7 @@ public class InteractionManager : MonoBehaviour
                 if (targetObject.GetComponent<LRD1Controller>()) targetObject.GetComponent<LRD1Controller>().ExecuteInteraction();
                 else if (targetObject.GetComponent<LRD2Controller>()) targetObject.GetComponent<LRD2Controller>().ExecuteInteraction();
                 else if (targetObject.GetComponent<ElevatorButtonController>()) targetObject.GetComponent<ElevatorButtonController>().ExecuteInteraction();
+                else if (targetObject.GetComponent<PhoneController>()) targetObject.GetComponent<PhoneController>().ExecuteInteraction();
             }
         }
         else

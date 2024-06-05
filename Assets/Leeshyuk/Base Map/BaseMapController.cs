@@ -26,10 +26,12 @@ public class BaseMapController : MonoBehaviour
             string roomNumber = signboards[i].GetComponent<SignboardController>().initialNumber;
             signboards[i].GetComponent<SignboardController>().initialNumber = string.Format("{0}{1}{2}", floor, roomNumber[1], roomNumber[2]);
         }
-        for (int i = 0; i < infoTexts.Length; i++)
-        {
-            infoTexts[i].text = string.Format("{0}F", floor);
-        }
+        infoTexts[0].text = string.Format("{0}F", floor);
+        infoTexts[1].text = string.Format("{0}F", floor);
+        infoTexts[2].text = string.Format("{0}", floor);
+        infoTexts[3].text = string.Format("{0}", floor);
+        infoTexts[4].text = string.Format("{0}", floor);
+        infoTexts[5].text = string.Format("{0}", floor);
     }
 
     public void StartStory1()
@@ -73,7 +75,6 @@ public class BaseMapController : MonoBehaviour
 
     void StartStory7()
     {
-        elevatorAudioSounds[2].Stop();
         elevatorController.ChangeText("2");
         Invoke(nameof(StartStory8), 1);
     }
@@ -86,6 +87,7 @@ public class BaseMapController : MonoBehaviour
     }
     void StartStory9()
     {
+        elevatorAudioSounds[2].Stop();
         elevatorAudioSounds[3].Stop();
     }
 }

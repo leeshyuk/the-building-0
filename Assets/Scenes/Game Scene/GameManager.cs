@@ -2,13 +2,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject player;
     public int floor = 1;
     public bool isStrange = false;
     public int tpCount = 0;
     public bool onStage = true;
-    public string[] theStranges = { "Door", "Can", "Signboard", "Picture", "Rotation", "Ghost" };
-    public string now;
+    public string[] theStranges = { "Door", "Can", "Signboard", "Picture", "Rotation", "Ghost"};
+    public string now = "None";
 
     public GameObject baseMap;
 
@@ -23,15 +22,21 @@ public class GameManager : MonoBehaviour
 
     public void InitStage(int stage)
     {
+        now = "None";
         floor = stage;
-        isStrange = Random.Range(0, 1).Equals(0);
+        isStrange = Random.Range(0, 2).Equals(0);
         if (floor == 5)
         {
             isStrange = false;
+            transform.Find("Phone").gameObject.SetActive(true);
+        }
+        else
+        {
+            transform.Find("Phone").gameObject.SetActive(false);
         }
         if (isStrange)
         {
-            now = theStranges[Random.Range(0, 1/*theStranges.Length - 1*/)];
+            now = theStranges[Random.Range(0, theStranges.Length)];
             Invoke(now, 0);
         }
         baseMapController.Init(stage);
@@ -67,7 +72,7 @@ public class GameManager : MonoBehaviour
         transform.GetComponentInChildren<Ghost>().enabled = !transform.GetComponentInChildren<Ghost>().enabled;
     }
 
-    void Stop()
+    public void Stop()
     {
         Invoke(now, 0);
     }

@@ -11,12 +11,16 @@ public class LoadingSceneController : MonoBehaviour
 
     public static void LoadScene(string sceneName)
     {
-        nextScene = sceneName;
         SceneManager.LoadScene("Loading Scene");
+        nextScene = sceneName;
     }
 
+    private void Start()
+    {
+        Invoke(nameof(StartLoad), 1);
+    }
     // Start is called before the first frame update
-    void Start()
+    void StartLoad()
     {  
         StartCoroutine(LoadSceneProcess());
     }
@@ -39,7 +43,7 @@ public class LoadingSceneController : MonoBehaviour
             {
                 timer += Time.unscaledDeltaTime;
                 print(timer);
-                loadingText.text = string.Format("로딩 중...{0}%", Mathf.Floor((op.progress + Mathf.Lerp(0f, 0.1f, timer * 10)) * 100).ToString());
+                loadingText.text = string.Format("로딩 중...{0}%", Mathf.Floor((op.progress + Mathf.Lerp(0f, 0.1f, timer)) * 100).ToString());
                 if (loadingText.text == "로딩 중...100%")
                 {
                     op.allowSceneActivation = true;

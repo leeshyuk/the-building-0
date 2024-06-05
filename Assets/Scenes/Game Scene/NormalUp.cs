@@ -18,6 +18,7 @@ public class NormalUp : MonoBehaviour
         other.transform.position = new Vector3(-1.34998083f + initPosition.x, initPosition.y - 4.66666f, 25.6099968f - initPosition.z);
         Invoke(nameof(UnfreezePlayer), time);
         manager.onStage = false;
+        if (manager.isStrange) manager.Stop();
         manager.tpCount++;
         if (manager.tpCount >= 2 || manager.isStrange || manager.floor == 5)
         {

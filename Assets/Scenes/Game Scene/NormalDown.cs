@@ -16,6 +16,7 @@ public class NormalDown : MonoBehaviour
         other.transform.position = new Vector3(-1.34998083f + initPosition.x, initPosition.y + 4.66666f, 25.6099968f - initPosition.z);
         Invoke(nameof(UnfreezePlayer), time);
         manager.onStage = false;
+        if (manager.isStrange) manager.Stop();
         manager.InitStage(1);
     }
 

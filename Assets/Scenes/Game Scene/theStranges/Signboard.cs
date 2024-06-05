@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Signboard : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject[] signboards;
+    public int index;
+
+    private void OnEnable()
     {
-        
+        index = Random.Range(0, signboards.Length);
+        signboards[index].GetComponent<SignboardController>().strangeKorean = "강의실";
+        signboards[index].GetComponent<SignboardController>().strangeEnglish = "Leacture Room";
+        signboards[index].GetComponent<SignboardController>().strangeState = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        signboards[index].GetComponent<SignboardController>().strangeState = false;
     }
 }

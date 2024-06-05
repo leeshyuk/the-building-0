@@ -13,6 +13,7 @@ public class StrangeUp : MonoBehaviour
         other.transform.position = initPosition + new Vector3(0, -4.66666f, 0);
         Invoke(nameof(UnfreezePlayer), time);
         manager.onStage = false;
+        if (manager.isStrange) manager.Stop();
         manager.tpCount++;
         if (manager.tpCount >= 2 || !manager.isStrange || manager.floor == 5)
         {

@@ -148,12 +148,6 @@ public class BasicFPCC : MonoBehaviour
     public float sprintFOV = 80f;
     public float sprintFOVStepTime = 10f;
 
-
-    private void Awake()
-    {
-        //transform.position = new Vector3(8.7f, 0.08f, 25.7f); // 엘리
-    }
-
     void Start()
     {
         stepAudio = GetAudioSource("Step Audio");

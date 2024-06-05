@@ -13,6 +13,7 @@ public class StrangeDown : MonoBehaviour
         other.transform.position = initPosition + new Vector3(0, 4.66666f, 0);
         Invoke(nameof(UnfreezePlayer), time);
         manager.onStage = false;
+        if (manager.isStrange) manager.Stop();
         manager.InitStage(1);
     }
     void UnfreezePlayer()
