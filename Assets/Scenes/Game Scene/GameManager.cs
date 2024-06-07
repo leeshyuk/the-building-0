@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     public bool isStrange = false;
     public int tpCount = 0;
     public bool onStage = true;
-    public string[] theStranges = { "Door", "Can", "Signboard", "Picture", "Rotation", "Ghost"};
+    public string[] theStranges = { "Door", "Signboard", "Picture", "Ghost"};
     public string now = "None";
 
     public GameObject baseMap;
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     {
         now = "None";
         floor = stage;
-        isStrange = Random.Range(0, 2).Equals(0);
+        isStrange = !Random.Range(0, 5).Equals(0);
         if (floor == 5)
         {
             isStrange = false;
@@ -47,11 +47,6 @@ public class GameManager : MonoBehaviour
         transform.GetComponentInChildren<Door>().enabled = !transform.GetComponentInChildren<Door>().enabled;
     }
 
-    void Can()
-    {
-        transform.GetComponentInChildren<Can>().enabled = !transform.GetComponentInChildren<Can>().enabled;
-    }
-
     void Signboard()
     {
         transform.GetComponentInChildren<Signboard>().enabled = !transform.GetComponentInChildren<Signboard>().enabled;
@@ -59,17 +54,12 @@ public class GameManager : MonoBehaviour
 
     void Picture()
     {
-        transform.GetComponentInChildren<Picture>().enabled = !transform.GetComponentInChildren<Picture>().enabled;
-    }
-
-    void Rotation()
-    {
-        transform.GetComponentInChildren<Rotation>().enabled = !transform.GetComponentInChildren<Rotation>().enabled;
+        transform.Find("Picture").gameObject.active = !transform.Find("Picture").gameObject.active;
     }
 
     void Ghost()
     {
-        transform.GetComponentInChildren<Ghost>().enabled = !transform.GetComponentInChildren<Ghost>().enabled;
+        transform.Find("Ghost").gameObject.active = !transform.Find("Ghost").gameObject.active;
     }
 
     public void Stop()

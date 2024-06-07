@@ -11,6 +11,10 @@ public class BaseMapController : MonoBehaviour
     public AudioSource[] elevatorAudioSounds;
     ElevatorController elevatorController;
 
+    public GameObject[] doors;
+
+    public 
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +36,11 @@ public class BaseMapController : MonoBehaviour
         infoTexts[3].text = string.Format("{0}", floor);
         infoTexts[4].text = string.Format("{0}", floor);
         infoTexts[5].text = string.Format("{0}", floor);
+        for (int i = 0;i < doors.Length;i++)
+        {
+            if (doors[i].GetComponent<LRD1Controller>()) doors[i].GetComponent<LRD1Controller>().angle = 0;
+            else doors[i].GetComponent<LRD2Controller>().angle = 0;
+        }
     }
 
     public void StartStory1()

@@ -521,7 +521,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC564\uB529"
+  m_text: "\uB05D"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bd486918ca4ccb3429f4e152073e347e, type: 2}
   m_sharedMaterial: {fileID: -6209020647952202434, guid: bd486918ca4ccb3429f4e152073e347e,
