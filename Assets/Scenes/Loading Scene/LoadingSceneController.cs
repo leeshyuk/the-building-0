@@ -43,8 +43,8 @@ public class LoadingSceneController : MonoBehaviour
             {
                 timer += Time.unscaledDeltaTime;
                 print(timer);
-                loadingText.text = string.Format("로딩 중...{0}%", Mathf.Floor((op.progress + Mathf.Lerp(0f, 0.1f, timer)) * 100).ToString());
-                if (loadingText.text == "로딩 중...95%")
+                loadingText.text = string.Format("로딩 중...{0}%", Mathf.Floor((op.progress + Mathf.Lerp(0f, 0.1f, timer/10)) * 100).ToString());
+                if (loadingText.text == "로딩 중...100%")
                 {
                     op.allowSceneActivation = true;
                     yield break;

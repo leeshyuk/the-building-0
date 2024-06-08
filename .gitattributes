@@ -1,3 +1,8 @@
 1.unity filter=lfs diff=lfs merge=lfs -text
 Game[[:space:]]Scene.unity filter=lfs diff=lfs merge=lfs -text
 Build.zip filter=lfs diff=lfs merge=lfs -text
+The[[:space:]]Building[[:space:]]0.zip filter=lfs diff=lfs merge=lfs -text
+The[[:space:]]Building[[:space:]]0 filter=lfs diff=lfs merge=lfs -text
+Building filter=lfs diff=lfs merge=lfs -text
+0.zip filter=lfs diff=lfs merge=lfs -text
+The filter=lfs diff=lfs merge=lfs -text

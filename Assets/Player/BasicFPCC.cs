@@ -33,6 +33,8 @@ using UnityEngine;
 using Unity.VisualScripting;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
+using TMPro;
+
 
 
 
@@ -148,8 +150,14 @@ public class BasicFPCC : MonoBehaviour
     public float sprintFOV = 80f;
     public float sprintFOVStepTime = 10f;
 
+    public bool developerMode = false;
+    public int stack = 0;
+    public TextMeshProUGUI developer;
+    public GameManager gameManager;
+
     void Start()
     {
+        
         stepAudio = GetAudioSource("Step Audio");
         runningAudio = GetAudioSource("Running Audio");
         landingAudio = GetAudioSource("Landing Audio");
@@ -175,6 +183,17 @@ public class BasicFPCC : MonoBehaviour
         ProcessInputs();
         ProcessLook();
         ProcessMovement();
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            stack++;
+        }
+        if (stack == 5)
+        {
+            developerMode = !developerMode;
+            stack = 0;
+        }
+        developer.gameObject.active = developerMode;
+        developer.text = gameManager.now;
     }
 
     private void FixedUpdate()
